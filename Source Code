@@ -1,0 +1,53 @@
+# Buat array
+nama = ["A", "B", "C", "D"]
+kode = ["A", "B", "C", "D"]
+
+# menyimpan kurs array dan persen 
+kurs = []
+persen = []
+
+uang = float(input("Masukkan jumlah uang : Rp "))
+
+# Input kurs 
+for i in range(4):
+    nilai = float(input("Nilai mata uang " + kode[i] + " terhadap rupiah (dalam rupiah): Rp "))
+    kurs.append(nilai)
+
+# Input persen kenaikan/penurunan per bulan 
+for i in range(4):
+    nilai = float(input("Kenaikan/penurunan mata uang " + kode[i] + " setiap bulan (dalam persen): "))
+    persen.append(nilai)
+
+bulan = int(input("Kapan bulan diambil (1-12): "))
+pilihan = input("Mata uang yang diambil (A/B/C/D): ")
+
+# Mengubah huruf menjadi nomor urut array
+if pilihan == "A":
+    urutan = 0
+elif pilihan == "B":
+    urutan = 1
+elif pilihan == "C":
+    urutan = 2
+elif pilihan == "D":
+    urutan = 3
+else:
+    urutan = -1
+
+#Konversi
+if urutan == -1:
+    print("Pilihan mata uang salah, harus A, B, C, atau D")
+elif bulan < 1 or bulan > 12:
+    print("Bulan harus antara 1 sampai 12")
+else:
+    kurs_sekarang = kurs[urutan]
+
+    # Bunga majemuk
+    for b in range(1, bulan + 1):
+        kurs_sekarang = kurs_sekarang * (1 + persen[urutan] / 100)
+        print("Bulan ke-" + str(b) + " kurs 1 " + nama[urutan] + " = Rp " + str(round(kurs_sekarang, 2)))
+
+    # Total uang akhir
+    total = uang / kurs_sekarang
+
+    print()
+    print("Total akhir mata uang:", round(total, 2), nama[urutan])
